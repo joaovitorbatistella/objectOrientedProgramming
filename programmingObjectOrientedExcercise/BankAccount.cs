@@ -8,7 +8,7 @@ namespace programmingObjectOrientedExcercise
     {
         public BankAccount(string customer_type,
             string account_number,
-            string holder,
+            Customer holder,
             int balance,
             int total_limit,
             bool free_pix,
@@ -27,7 +27,7 @@ namespace programmingObjectOrientedExcercise
 
         string customer_type { get; set; }
         string account_number { get; set; }
-        string holder { get; set; }
+        Customer holder { get; set; }
         int balance { get; set; }
         int total_limit { get; set; }
         int limit_available { get; set; }
@@ -118,18 +118,25 @@ namespace programmingObjectOrientedExcercise
                     }
 
                     // check daily limit
-                    //
+                    if (this.daily_pix_limit > value)
+                    {
+                        throw new HandleErrorException("The PIX transfer is unavailable, daily limit blocked this action");
+                    }
+
                     this.balance -= value;
                     toAccount.balance += value;
-
+                    Console.WriteLine("PIX has been successfully performed.");
                 }
                 else if (transferOption == 1)
                 {
-                    //TED
+                    this.balance -= value;
+                    toAccount.balance += value;
+                    Console.WriteLine("TED has been successfully performed.");
                 }
                 else
                 {
                     //error
+                    throw new HandleErrorException("Invalid option");
                 }
 
                 return $"Succesfully transfer to {toAccount.account_number}";
