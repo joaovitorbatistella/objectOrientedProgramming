@@ -90,9 +90,12 @@ namespace programmingObjectOrientedExcercise
 
         public void showBalance()
         {
+            Console.WriteLine("\n\n");
+            Console.WriteLine($"Account: {this.account_number}");
             Console.WriteLine($"Balance: {this.balance}");
             Console.WriteLine($"Total limit: {this.total_limit}");
             Console.WriteLine($"Available limit: {this.limit_available}");
+            Console.WriteLine("\n");
         }
 
         public string transferBalance(int value, BankAccount toAccount)
@@ -107,6 +110,9 @@ namespace programmingObjectOrientedExcercise
                 // enter transfer type
                 int transferOption = 0;
 
+                Console.WriteLine("Enter transfer option.");
+                Console.WriteLine("0 -> PIX");
+                Console.WriteLine("1 -> TED");
                 transferOption = int.Parse(Console.ReadLine());
 
                 if (transferOption == 0)
@@ -118,7 +124,7 @@ namespace programmingObjectOrientedExcercise
                     }
 
                     // check daily limit
-                    if (this.daily_pix_limit > value)
+                    if (this.daily_pix_limit < value)
                     {
                         throw new HandleErrorException("The PIX transfer is unavailable, daily limit blocked this action");
                     }

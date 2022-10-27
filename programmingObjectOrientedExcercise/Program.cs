@@ -16,17 +16,14 @@ namespace programmingObjectOrientedExcercise
                                            "Rua Almirante Barroso, nº 128 - Centro, Tapera - RS, Brasil",
                                            "+5554991798405");
 
-                if (c1.majority())
-                {
-                    BankAccount ba1 = new BankAccount("phisic person", "010032-1", c1, 5000, 2000, true, 500);
-                    Console.WriteLine("Successfully created bank account");
-                    ba1.showBalance();
-
-                }
-                else
+                if (!c1.majority())
                 {
                     throw new HandleErrorException("Customer is underage");
                 }
+
+                BankAccount ba1 = new BankAccount("phisic person", "010032-1", c1, 5000, 2000, true, 500);
+                Console.WriteLine("Successfully created bank account");
+                ba1.showBalance();
 
 
 
@@ -36,19 +33,32 @@ namespace programmingObjectOrientedExcercise
                                            "Rua de Tapera, nº 24 - Progresso, Tapera - RS, Brasil",
                                            "+5554999898999");
 
-                if (c2.majority())
-                {
-                    BankAccount ba2 = new BankAccount("phisic person", "020141-2", c2, 5500, 1900, false, 400);
-                    Console.WriteLine("Successfully created bank account");
-                    ba2.showBalance();
-                }
-                else
+                if (!c2.majority())
                 {
                     throw new HandleErrorException($"Customer is underage");
                 }
 
+                BankAccount ba2 = new BankAccount("phisic person", "020141-2", c2, 5500, 1900, false, 400);
+                Console.WriteLine("Successfully created bank account");
+                ba2.showBalance();
 
-                
+
+                ba1.transferBalance(100, ba2);
+
+                ba1.showBalance();
+                ba2.showBalance();
+
+
+                ba1.deposit(500);
+
+                ba1.showBalance();
+                ba2.showBalance();
+
+
+                ba2.withdraw(50);
+
+                ba1.showBalance();
+                ba2.showBalance();
             }
             catch (HandleErrorException ex)
             {
